@@ -1,0 +1,63 @@
+import React from 'react';
+import Form from './Form'
+
+class ParentComponent extends React.Component {
+  state = {
+    firstName: "",
+    lastName: "",
+  }
+  
+  handleFirstNameChange = event => {
+    this.setState({
+      firstName: event.target.value
+    })
+  }
+
+  handleLastNameChange = event => {
+    this.setState({
+      lastName: event.target.value
+    })
+  }
+
+  render() {
+    return (
+      <Form
+        formData={this.state}
+        handleFirstNameChange={this.handleFirstNameChange}
+        handleLastNameChange={this.handleLastNameChange}
+      />
+    )
+  }
+}
+
+export default ParentComponent;
+```
+
+Then `Form` can become:
+
+```js
+// src/components/Form
+import React from 'react';
+
+class Form extends React.Component {
+  render() {
+    return (
+      <div>
+        <form>
+          <input
+            type="text"
+            onChange={event => this.props.handleFirstNameChange(event)}
+            value={this.props.formData.firstName}
+          />
+          <input
+            type="text"
+            onChange={event => this.props.handleLastNameChange(event)}
+            value={this.props.formData.lastName}
+          />
+        </form>
+      </div>
+    )
+  }
+}
+
+export default Form;
