@@ -3,7 +3,8 @@ import React from 'react';
 class Form extends React.Component {
   state = {
     firstName: "John",
-    lastName: "Henry"
+    lastName: "Henry",
+    submittedData: []
   }
 
   handleFirstNameChange = event => {
@@ -21,7 +22,8 @@ class Form extends React.Component {
   handleSubmit = event => {
     event.preventDefault()
     let formData = { firstName: this.state.firstName, lastName: this.state.lastName }
-    this.sendFormDataSomewhere(formData)
+    let dataArray = this.state.submittedData.concat(formData)
+    this.setState({submittedData: dataArray})
   }
 
   render() {
